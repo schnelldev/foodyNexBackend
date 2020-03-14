@@ -12,6 +12,7 @@ public class DietStructure {
 
 	@Id
 	Integer dietStructureId;
+	int planValidityInMonths;
 	String timing;
 	List<String> dietComponents;
 	
@@ -26,5 +27,17 @@ public class DietStructure {
 	}
 	public void setDietComponents(List<String> dietComponents) {
 		this.dietComponents = dietComponents;
+	}
+	public int getPlanValidityInMonths() {
+		return planValidityInMonths;
+	}
+	public void setPlanValidityInMonths(int planValidityInMonths) {
+		this.planValidityInMonths = planValidityInMonths;
+	}
+	public String getTiming() {
+		return timing;
+	}
+	public void setTiming(String timing) {
+		this.timing = timing;
 	}
 }

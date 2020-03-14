@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 import com.gm.base.services.ClientSeqPrefixService;
 
 @SpringBootApplication
+@EnableScheduling
 public class GymApplication {
 
 	@Value("${spring.data.mongodb.database}")
@@ -43,4 +46,5 @@ public class GymApplication {
 	public void loadAllClients() {
 		clientSeqPrefixService.loadAllClients();
 	}
+	
 }

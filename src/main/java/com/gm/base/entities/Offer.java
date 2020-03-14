@@ -18,7 +18,7 @@ public class Offer {
 	@Id
 	Integer offerId;
 	String offerName;
-	List<MembershipPackage> eligiblePackages;
+	List<Plan> eligiblePackages;
 	OfferType offerType;
 	Date startDate;
 	Date endDate;
@@ -59,11 +59,11 @@ public class Offer {
 		this.offerName = offerName;
 	}
 
-	public List<MembershipPackage> getEligiblePackages() {
+	public List<Plan> getEligiblePackages() {
 		return eligiblePackages;
 	}
 
-	public void setEligiblePackages(List<MembershipPackage> eligiblePackages) {
+	public void setEligiblePackages(List<Plan> eligiblePackages) {
 		this.eligiblePackages = eligiblePackages;
 	}
 

@@ -15,6 +15,7 @@ public class Transaction {
 
 	@Transient
 	public static final String SEQUENCE_NAME = "transaction_sequence";
+	
 	@Id
 	Integer transactionId;
 	String transactionRemark;

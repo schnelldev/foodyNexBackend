@@ -1,48 +1,111 @@
 package com.gm.base.entities;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.gm.base.enums.MembershipType;
+
 @Document
 public class Plan {
 	
-	 @Transient
-	 public static final String SEQUENCE_NAME = "plan_sequence";
-
+	@Transient
+	public static final String SEQUENCE_NAME = "plan_sequence";
+	
 	@Id
 	Integer planId;
-	Date planBuyDate;
 	String planName;
+	MembershipType membershipType;
+	int frequencyInMonth;
+	String description;
+	public List<GymnexClass> availableClasses;
+	boolean planDiscountAvailable;
+	int planDiscount;
+	boolean productDiscountAvailable;
+	int productDiscount;
 	String clientId;
-	String planDesc;
-	List<String> activities; 
+	int membershipAmount;
 
-	public List<String> getActivities() {
-		return activities;
+	public int getMembershipAmount() {
+		return membershipAmount;
 	}
 
-	public void setActivities(List<String> activities) {
-		this.activities = activities;
+	public void setMembershipAmount(int membershipAmount) {
+		this.membershipAmount = membershipAmount;
 	}
 
-	public String getPlanName() {
-		return planName;
+	public String getClientId() {
+		return clientId;
 	}
 
-	public void setPlanName(String planName) {
-		this.planName = planName;
+	public MembershipType getMembershipType() {
+		return membershipType;
 	}
 
-	public String getPlanDesc() {
-		return planDesc;
+	public void setMembershipType(MembershipType membershipType) {
+		this.membershipType = membershipType;
 	}
 
-	public void setPlanDesc(String planDesc) {
-		this.planDesc = planDesc;
+	public int getFrequencyInMonth() {
+		return frequencyInMonth;
+	}
+
+	public void setFrequencyInMonth(int frequencyInMonth) {
+		this.frequencyInMonth = frequencyInMonth;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<GymnexClass> getAvailableClasses() {
+		return availableClasses;
+	}
+
+	public void setAvailableClasses(List<GymnexClass> availableClasses) {
+		this.availableClasses = availableClasses;
+	}
+
+	public boolean isPlanDiscountAvailable() {
+		return planDiscountAvailable;
+	}
+
+	public void setPlanDiscountAvailable(boolean planDiscountAvailable) {
+		this.planDiscountAvailable = planDiscountAvailable;
+	}
+
+	public int getPlanDiscount() {
+		return planDiscount;
+	}
+
+	public void setPlanDiscount(int planDiscount) {
+		this.planDiscount = planDiscount;
+	}
+
+	public boolean isProductDiscountAvailable() {
+		return productDiscountAvailable;
+	}
+
+	public void setProductDiscountAvailable(boolean productDiscountAvailable) {
+		this.productDiscountAvailable = productDiscountAvailable;
+	}
+
+	public int getProductDiscount() {
+		return productDiscount;
+	}
+
+	public void setProductDiscount(int productDiscount) {
+		this.productDiscount = productDiscount;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
 	}
 
 	public Integer getPlanId() {
@@ -53,20 +116,12 @@ public class Plan {
 		this.planId = planId;
 	}
 
-	public Date getPlanBuyDate() {
-		return planBuyDate;
+	public String getPlanName() {
+		return planName;
 	}
 
-	public void setPlanBuyDate(Date planBuyDate) {
-		this.planBuyDate = planBuyDate;
-	}
-
-	public String getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
+	public void setPlanName(String planName) {
+		this.planName = planName;
 	}
 
 }

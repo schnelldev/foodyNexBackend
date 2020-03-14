@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,16 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gm.base.entities.ClientSeqPrefix;
+import com.gm.base.entities.GymnexClass;
 import com.gm.base.entities.Member;
-import com.gm.base.entities.MembershipPackage;
-import com.gm.base.entities.Plan;
 import com.gm.base.entities.RegimeDay;
 import com.gm.base.entities.Trainer;
 import com.gm.base.entities.User;
 import com.gm.base.enums.UserType;
 import com.gm.base.repositories.ClientSeqPrefixRepository;
+import com.gm.base.repositories.GymnexClassRepository;
 import com.gm.base.repositories.MemberRepository;
-import com.gm.base.repositories.MembershipPackageRepository;
 import com.gm.base.repositories.PlanRepository;
 import com.gm.base.repositories.TrainerRepository;
 import com.gm.base.services.SequenceGeneratorService;
@@ -56,9 +54,9 @@ public class MemberController {
 
 	@Autowired
 	PlanRepository planRepository;
-
+	
 	@Autowired
-	MembershipPackageRepository membershipPackageRepository;
+	GymnexClassRepository gymnexClassRepository;
 
 	@Autowired
 	SequenceGeneratorService sequenceGeneratorService;
@@ -81,6 +79,8 @@ public class MemberController {
 
 	private final static String PROFILE_IMAGE = "/profile.png";
 
+	
+	/* Implementation Pending */
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String addNewEntity(@RequestBody Member member) {
 		Optional<ClientSeqPrefix> optional = clientSeqPrefixRepository.findById(member.getClientId());
@@ -94,17 +94,6 @@ public class MemberController {
 			member.setHashedPassword(encoder.encode(defaultPassword));
 			member.setUserType(UserType.MEMBER);
 			member.setMembershipStartDate(LocalDate.now());
-
-			if (member.getMembershipPackage() != null
-					&& member.getMembershipPackage().getMembershipPackageId() != null) {
-				Optional<MembershipPackage> mpOptional = membershipPackageRepository
-						.findById(member.getMembershipPackage().getMembershipPackageId());
-				if (mpOptional.isPresent()) {
-					MembershipPackage mp = mpOptional.get();
-					int noOfDays = mp.getDayCount();
-					member.setMembershipEndDate(LocalDate.now().plusDays(noOfDays));
-				}
-			}
 			memberRepository.save(member);
 		}
 		return userId;
@@ -135,35 +124,35 @@ public class MemberController {
 		return memberRepository.countByClientIdAndMembershipStartDateGreaterThanEqual(clientId,LocalDate.now().withDayOfMonth(1));
 	}
 
-	@PutMapping("/{id}/membershipPackage/add/{packageId}")
-	public void updateMembershipPackage(@PathVariable String id, @PathVariable Integer packageId) {
-		Optional<Member> optional = memberRepository.findById(id);
-		Optional<MembershipPackage> optionalPackage = membershipPackageRepository.findById(packageId);
-		if (optionalPackage.isPresent() && optional.isPresent()) {
-			Member member = optional.get();
-			member.setMembershipPackage(optionalPackage.get());
-			memberRepository.save(member);
-		}
-	}
-
-	@PutMapping("/{id}/plan/add/{planId}")
-	public void updatePlan(@PathVariable String id, @PathVariable Integer planId) {
-		Optional<Member> optional = memberRepository.findById(id);
-		Optional<Plan> optionalPlan = planRepository.findById(planId);
-		if (optionalPlan.isPresent() && optional.isPresent()) {
-			Member member = optional.get();
-			Plan plan = optionalPlan.get();
-			plan.setPlanBuyDate(new Date());
-			member.getPlan().add(plan);
-			memberRepository.save(member);
-		}
-	}
+//	@PutMapping("/{id}/membershipPackage/add/{packageId}")
+//	public void updateMembershipPackage(@PathVariable String id, @PathVariable Integer packageId) {
+//		Optional<Member> optional = memberRepository.findById(id);
+//		Optional<Plan> optionalPackage = membershipPackageRepository.findById(packageId);
+//		if (optionalPackage.isPresent() && optional.isPresent()) {
+//			Member member = optional.get();
+//			member.setMembershipPackage(optionalPackage.get());
+//			memberRepository.save(member);
+//		}
+//	}
+//
+//	@PutMapping("/{id}/plan/add/{planId}")
+//	public void updatePlan(@PathVariable String id, @PathVariable Integer planId) {
+//		Optional<Member> optional = memberRepository.findById(id);
+//		Optional<Plan> optionalPlan = planRepository.findById(planId);
+//		if (optionalPlan.isPresent() && optional.isPresent()) {
+//			Member member = optional.get();
+//			Plan plan = optionalPlan.get();
+//			plan.setPlanBuyDate(new Date());
+//			member.getPlan().add(plan);
+//			memberRepository.save(member);
+//		}
+//	}-
 
 	@PutMapping("/{id}/regime")
 	public void updateRegime(@PathVariable String id, @RequestBody RegimeDay regimeDay) {
 		Optional<Member> optional = memberRepository.findById(id);
 		if (optional.isPresent()) {
-			Member member = optional.get();
+			Member  member = optional.get();
 
 			boolean isPresent = false;
 			for (RegimeDay x : member.getRegimeDays()) {
@@ -234,4 +223,36 @@ public class MemberController {
 			}
 		}
 	}
+	
+	@PostMapping("/{id}/class")
+	public String updateClass(@PathVariable String id, @RequestBody GymnexClass gymnexClass) {
+		Optional<Member> optional = memberRepository.findById(id);
+		if (optional.isPresent()) {
+			Member  member = optional.get();
+			
+			
+			gymnexClass.setGymnexClassId(sequenceGeneratorService.generateSequence(GymnexClass.SEQUENCE_NAME));
+			member.getClasses().add(gymnexClass);
+			
+			
+//			boolean isPresent = false;
+//			for (RegimeDay x : member.getRegimeDays()) {
+//				if (x.getDayOfWeek() == regimeDay.getDayOfWeek()) {
+//					isPresent = true;
+//					x.setRegimeText(regimeDay.getRegimeText());
+//				}
+//			}
+//			if (!isPresent) {
+//				member.getRegimeDays().add(regimeDay);
+//			}
+
+			//gymnexClassRepository.save(gymnexClass);
+			memberRepository.save(member);
+			return "success";
+		}
+		return "member not found";
+	}
+	
+	
+	
 }

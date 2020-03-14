@@ -4,29 +4,37 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Member extends User{
+import com.gm.base.enums.MemberType;
 
-	List<Plan> plan;
-	MembershipPackage membershipPackage;
+public class Member extends User{
+	
+	
+	int trialDays;
+	String purpose;
+	String photoUrl;
 	Integer weight;
 	Integer height;
-	String purpose;
-	User trainer;
-	String photoUrl;
-	List<Transaction> transactions = new ArrayList<>();
-	List<RegimeDay> regimeDays = new ArrayList<>();
 	String biometricId;
-	DietStructure dietStructure;
 	LocalDate membershipStartDate;
 	LocalDate membershipEndDate;
+	
+	MemberType memberType;
+	
+	Plan plan;
+	List<GymnexClass> classes = new ArrayList<>();
+	//Plan membershipPackage;
+	User trainer;
+	List<Transaction> transactions = new ArrayList<>();
+	List<RegimeDay> regimeDays = new ArrayList<>();
+	DietStructure dietStructure;
 
-	public MembershipPackage getMembershipPackage() {
-		return membershipPackage;
-	}
-
-	public void setMembershipPackage(MembershipPackage membershipPackage) {
-		this.membershipPackage = membershipPackage;
-	}
+//	public Plan getMembershipPackage() {
+//		return membershipPackage;
+//	}
+//
+//	public void setMembershipPackage(Plan membershipPackage) {
+//		this.membershipPackage = membershipPackage;
+//	}
 
 	public List<Transaction> getTransactions() {
 		return transactions;
@@ -44,13 +52,41 @@ public class Member extends User{
 		this.regimeDays = regimeDays;
 	}
 
-	public List<Plan> getPlan() {
+
+	public Plan getPlan() {
 		return plan;
 	}
 
-	public void setPlan(List<Plan> plan) {
+	public void setPlan(Plan plan) {
 		this.plan = plan;
 	}
+
+
+	public List<GymnexClass> getClasses() {
+		return classes;
+	}
+
+	public void setClasses(List<GymnexClass> classes) {
+		this.classes = classes;
+	}
+
+	public MemberType getMemberType() {
+		return memberType;
+	}
+
+	public void setMemberType(MemberType memberType) {
+		this.memberType = memberType;
+	}
+
+	public int getTrialDays() {
+		return trialDays;
+	}
+
+	public void setTrialDays(int trialDays) {
+		this.trialDays = trialDays;
+	}
+
+
 
 	public Integer getWeight() {
 		return weight;
@@ -76,20 +112,20 @@ public class Member extends User{
 		this.purpose = purpose;
 	}
 
-	public User getTrainer() {
-		return trainer;
-	}
-
-	public void setTrainer(User trainer) {
-		this.trainer = trainer;
-	}
-
 	public String getPhotoUrl() {
 		return photoUrl;
 	}
 
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
+	}
+
+	public User getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(User trainer) {
+		this.trainer = trainer;
 	}
 	
 	public String getBiometricId() {
