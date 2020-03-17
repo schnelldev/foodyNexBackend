@@ -19,21 +19,21 @@ public class Vendor {
 	String state;
 	int zipcode;
 	String country;
-	long gstNo;
+	String gstNo;
 	String panCardNo;
 	String productType;
 	String productName;
-	int productPrice;
-	int size;
+	boolean active;
 	
 	String contactName;
 	String contactNo;
-	String emailAddress;
+	String emailId;
 	
 	String supportContactNo;
 	String supportEmailId;
 	boolean hasWebsite;
 	String website;
+	
 	
 	public int getVendorId() {
 		return vendorId;
@@ -83,10 +83,10 @@ public class Vendor {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public long getGstNo() {
+	public String getGstNo() {
 		return gstNo;
 	}
-	public void setGstNo(long gstNo) {
+	public void setGstNo(String gstNo) {
 		this.gstNo = gstNo;
 	}
 	public String getPanCardNo() {
@@ -107,17 +107,12 @@ public class Vendor {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public int getProductPrice() {
-		return productPrice;
+	
+	public boolean isActive() {
+		return active;
 	}
-	public void setProductPrice(int productPrice) {
-		this.productPrice = productPrice;
-	}
-	public int getSize() {
-		return size;
-	}
-	public void setSize(int size) {
-		this.size = size;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	public String getContactName() {
 		return contactName;
@@ -131,17 +126,17 @@ public class Vendor {
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
-	public String getEmailAddress() {
-		return emailAddress;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 	public String getSupportContactNo() {
-		return contactNo;
+		return supportContactNo;
 	}
-	public void setSupportContactNo(String contactNo) {
-		this.contactNo = contactNo;
+	public void setSupportContactNo(String supportContactNo) {
+		this.supportContactNo = supportContactNo;
 	}
 	public String getSupportEmailId() {
 		return supportEmailId;
@@ -161,5 +156,5 @@ public class Vendor {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-
+	
 }
