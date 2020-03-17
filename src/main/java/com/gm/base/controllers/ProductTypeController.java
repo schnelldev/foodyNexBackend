@@ -57,6 +57,8 @@ public class ProductTypeController {
 		if(optional.isPresent()) {
 			ProductType productTypeEdit = optional.get();
 			productType.setProductTypeId(productTypeEdit.getProductTypeId());
+			productType.setCreatedDate(productTypeEdit.getCreatedDate());
+			productType.setUpdatedDate(new Date());
 			productTypeRepository.save(productType);
 			return "success";
 		}else return "entity not found";
