@@ -8,8 +8,11 @@ public class ClientSeqPrefix {
 	
 	@Id
 	String clientId;
+	String clientFullName;
 	Integer prefix;
 	String prefixString;
+	String hashedPassword;
+	
 
 	public String getClientId() {
 		return clientId;
@@ -33,5 +36,21 @@ public class ClientSeqPrefix {
 
 	public void setPrefixString(String prefixString) {
 		this.prefixString = prefixString;
+	}
+	
+	public String getClientFullName() {
+		return clientFullName;
+	}
+
+	public void setClientFullName(String clientFullName) {
+		this.clientFullName = clientFullName;
+	}
+
+	public String getHashedPassword() {
+		return hashedPassword;
+	}
+
+	public void setHashedPassword(String hashedPassword) {
+		this.hashedPassword = hashedPassword;
 	}
 }

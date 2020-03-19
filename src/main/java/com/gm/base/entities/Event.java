@@ -19,6 +19,7 @@ public class Event {
 	int price;
 	int registrationLimit;
 	ArrayList<String> eventPhotoNames;
+	 
 	
 	
 }

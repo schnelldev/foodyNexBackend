@@ -12,8 +12,7 @@ import com.gm.base.enums.ClassTime;
 @Document
 public class GymnexClass {
 	
-		
-		
+
 		@Transient
 		public static final String SEQUENCE_NAME = "gymnex_class_sequence";
 		

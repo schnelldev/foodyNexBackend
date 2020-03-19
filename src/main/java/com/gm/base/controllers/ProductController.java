@@ -20,7 +20,7 @@ import com.gm.base.repositories.ProductRepository;
 import com.gm.base.services.SequenceGeneratorService;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 @CrossOrigin
 public class ProductController {
 	@Autowired

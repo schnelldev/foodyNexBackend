@@ -45,6 +45,13 @@ public class VendorController {
 		return vendorRepository.findAll();
 	}
 	
+	@GetMapping("/{id}")
+	public Vendor get(@PathVariable Integer id){
+		if(vendorRepository.findById(id).isPresent()) {
+			return vendorRepository.findById(id).get();
+		}else return null ;
+	}
+	
 	
 	@PutMapping("/{id}")
 	public String update(@PathVariable Integer id,@RequestBody Vendor vendor) {
