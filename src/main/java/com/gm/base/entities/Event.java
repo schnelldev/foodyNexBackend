@@ -20,6 +20,4 @@ public class Event {
 	int registrationLimit;
 	ArrayList<String> eventPhotoNames;
 	 
-	
-	
 }
