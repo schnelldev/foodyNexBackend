@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.gm.base.entities.ClientSeqPrefix;
-import com.gm.base.repositories.ClientSeqPrefixRepository;
+import com.gm.base.entities.Client;
+import com.gm.base.repositories.ClientRepository;
 import com.gm.base.services.ClientSeqPrefixService;
 
 @Service
 public class ClientSeqPrefixServiceImpl implements ClientSeqPrefixService{
 
 	@Autowired
-	ClientSeqPrefixRepository clientSeqPrefixRepository;
+	ClientRepository clientSeqPrefixRepository;
 
 	@Value("#{'${gm.client.prefix}'.split(',')}") 
 	private List<String> prefixes; 
@@ -23,9 +23,9 @@ public class ClientSeqPrefixServiceImpl implements ClientSeqPrefixService{
 	@Override
 	public void loadAllClients() {
 		for(String prefix : prefixes) {
-			Optional<ClientSeqPrefix> optional = clientSeqPrefixRepository.findById(prefix);
+			Optional<Client> optional = clientSeqPrefixRepository.findById(prefix);
 			if(!optional.isPresent()) {
-				ClientSeqPrefix clientSeqPrefix = new ClientSeqPrefix();
+				Client clientSeqPrefix = new Client();
 				clientSeqPrefix.setClientId(prefix.split("#")[0]);
 				clientSeqPrefix.setPrefix(Integer.parseInt(prefix.split("#")[1]));
 				clientSeqPrefix.setPrefixString(prefix.split("#")[2]);

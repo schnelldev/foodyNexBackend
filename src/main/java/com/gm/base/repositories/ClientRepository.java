@@ -3,9 +3,9 @@ package com.gm.base.repositories;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.gm.base.entities.ClientSeqPrefix;
+import com.gm.base.entities.Client;
 
 @Repository
-public interface ClientSeqPrefixRepository extends MongoRepository<ClientSeqPrefix,String>{
+public interface ClientRepository extends MongoRepository<Client,String>{
 	
 }

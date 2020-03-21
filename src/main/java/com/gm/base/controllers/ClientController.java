@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gm.base.entities.ClientSeqPrefix;
-import com.gm.base.repositories.ClientSeqPrefixRepository;
+import com.gm.base.entities.Client;
+import com.gm.base.repositories.ClientRepository;
 
 @RestController
 @RequestMapping("api/clients")
 @CrossOrigin
-public class ClientSeqPrefixController {
+public class ClientController {
 	
 	@Autowired
-	ClientSeqPrefixRepository clientSeqPrefixRepository;
+	ClientRepository clientSeqPrefixRepository;
 	
 	@Autowired
 	BCryptPasswordEncoder encoder;
@@ -30,13 +30,13 @@ public class ClientSeqPrefixController {
 	private String clientPassword;
 	
 	@GetMapping()
-	public List<ClientSeqPrefix> getAll(){
+	public List<Client> getAll(){
 		return clientSeqPrefixRepository.findAll();
 	}
 	
 	
 	@PostMapping
-	public String post(@RequestBody ClientSeqPrefix clientSeqPrefix) {
+	public String post(@RequestBody Client clientSeqPrefix) {
 		
 		if(!clientSeqPrefixRepository.existsById(clientSeqPrefix.getClientId())) {
 			clientSeqPrefix.setHashedPassword(encoder.encode(clientPassword));

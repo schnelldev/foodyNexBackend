@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.gm.base.entities.ClientSeqPrefix;
+import com.gm.base.entities.Client;
 import com.gm.base.entities.Staff;
 import com.gm.base.entities.User;
 import com.gm.base.enums.UserType;
-import com.gm.base.repositories.ClientSeqPrefixRepository;
+import com.gm.base.repositories.ClientRepository;
 import com.gm.base.repositories.StaffRepository;
 import com.gm.base.services.SequenceGeneratorService;
 
@@ -45,7 +45,7 @@ public class StaffController {
 	SequenceGeneratorService sequenceGeneratorService;
 	
 	@Autowired
-	ClientSeqPrefixRepository clientSeqPrefixRepository; 
+	ClientRepository clientSeqPrefixRepository; 
 	
 	@Autowired
 	BCryptPasswordEncoder encoder;
@@ -62,7 +62,7 @@ public class StaffController {
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void addNewEntity(@RequestBody Staff staff) {
-		Optional<ClientSeqPrefix> optional = clientSeqPrefixRepository.findById(staff.getClientId());
+		Optional<Client> optional = clientSeqPrefixRepository.findById(staff.getClientId());
 		if(optional.isPresent()) {
 			String prefixStr = optional.get().getPrefixString();
 			staff.setUserId(prefixStr+"S"+sequenceGeneratorService.generateSequence(staff.getClientId()+User.STAFF_SEQUENCE_NAME));

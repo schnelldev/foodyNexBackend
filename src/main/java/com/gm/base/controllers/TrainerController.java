@@ -26,11 +26,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.gm.base.entities.ClientSeqPrefix;
+import com.gm.base.entities.Client;
 import com.gm.base.entities.Trainer;
 import com.gm.base.entities.User;
 import com.gm.base.enums.UserType;
-import com.gm.base.repositories.ClientSeqPrefixRepository;
+import com.gm.base.repositories.ClientRepository;
 import com.gm.base.repositories.TrainerRepository;
 import com.gm.base.services.SequenceGeneratorService;
 
@@ -46,7 +46,7 @@ public class TrainerController {
 	SequenceGeneratorService sequenceGeneratorService;
 
 	@Autowired
-	ClientSeqPrefixRepository clientSeqPrefixRepository;
+	ClientRepository clientSeqPrefixRepository;
 
 	@Autowired
 	BCryptPasswordEncoder encoder;
@@ -63,7 +63,7 @@ public class TrainerController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String addNewEntity(@RequestBody Trainer trainer) {
-		Optional<ClientSeqPrefix> optional = clientSeqPrefixRepository.findById(trainer.getClientId());
+		Optional<Client> optional = clientSeqPrefixRepository.findById(trainer.getClientId());
 		String userId = "";
 		if (optional.isPresent()) {
 			String prefixStr = optional.get().getPrefixString();
