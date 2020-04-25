@@ -12,10 +12,13 @@ import com.fm.app.enums.PaymentMode;
 
 @Document
 public class Order {
+	
+	public static final String SEQUENCE_NAME = "order_sequence";
 
 	@Id
 	int orderId;
 	int customerId;
+	int clientId;
 	List<OrderItem> orderItems = new ArrayList<>();
 	boolean discountApplicable;
 	int discount;
@@ -112,6 +115,14 @@ public class Order {
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
+	}
+
+	public int getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 }
