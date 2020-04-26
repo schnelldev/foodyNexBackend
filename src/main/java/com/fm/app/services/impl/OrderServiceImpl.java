@@ -21,23 +21,22 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	ClientRepository clientRepository;
 	
+	@Autowired
 	CustomerRepository customerRepository;
 	
 	@Autowired
 	SequenceGeneratorService sequenceGeneratorService;
 	
 	@Override
-	public String addOrder(Order order) throws InvalidClientException,InvalidCustomerException {
-		String result = "";
+	public Order addOrder(Order order) throws InvalidClientException,InvalidCustomerException {
 		if(!clientRepository.existsById(order.getClientId())) {
 			throw new InvalidClientException();
-		}else if(customerRepository.existsById(order.getCustomerId())){
+		}else if(!customerRepository.existsById(order.getCustomerId())){
 			throw new InvalidCustomerException();
 		}else {
 			order.setOrderId(sequenceGeneratorService.generateSequence(Order.SEQUENCE_NAME));
-			Order o = orderRepository.save(order);
-			result = String.valueOf(o.getOrderId());
+			order = orderRepository.save(order);
 		}
-		return result;
+		return order;
 	}
 }

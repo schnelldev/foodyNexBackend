@@ -10,6 +10,7 @@ public class Cart {
 	@Id
 	int cartId;
 	int customerId;
+	int clientId;
 	List<CartItem> cartItems = new ArrayList<>();
 
 	public int getCartId() {
@@ -34,6 +35,14 @@ public class Cart {
 
 	public void setCartItems(List<CartItem> cartItems) {
 		this.cartItems = cartItems;
+	}
+
+	public int getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 }

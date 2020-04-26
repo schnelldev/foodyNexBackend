@@ -5,5 +5,5 @@ import com.fm.app.exceptions.InvalidClientException;
 import com.fm.app.exceptions.InvalidCustomerException;
 
 public interface OrderService {
-	public String addOrder(Order order) throws InvalidClientException,InvalidCustomerException;
+	public Order addOrder(Order order) throws InvalidClientException,InvalidCustomerException;
 }
