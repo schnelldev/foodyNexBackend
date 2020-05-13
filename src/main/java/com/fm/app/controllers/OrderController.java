@@ -21,13 +21,13 @@ public class OrderController {
 	OrderService orderService;
 	
 	@PostMapping
-	public ResponseEntity<String> addOrder(@RequestBody Order order) {
-		String result = "";
+	public ResponseEntity<Object> addOrder(@RequestBody Order order) {
+		
 		try {
-			result = orderService.addOrder(order);
+			order = orderService.addOrder(order);
 		}catch(Exception exception) {
-			return new ResponseEntity<String>(exception.getMessage(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<String>(result, HttpStatus.OK);
+		return new ResponseEntity<>(order, HttpStatus.OK);
 	}
 }

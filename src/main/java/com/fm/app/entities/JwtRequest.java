@@ -1,4 +1,4 @@
-package com.fm.app.vo;
+package com.fm.app.entities;
 
 import java.io.Serializable;
 

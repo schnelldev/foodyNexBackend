@@ -21,9 +21,9 @@ public class CartController {
 
 	public ResponseEntity<Object> addToCart(@RequestBody Cart cart){
 		try {
-			return new ResponseEntity<Object>(cartService.addToCart(cart),HttpStatus.OK);
+			return new ResponseEntity<>(cartService.addToCart(cart),HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<Object>(e.getMessage(),HttpStatus.OK);
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.OK);
 		}
 	}
 }

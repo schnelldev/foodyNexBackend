@@ -1,6 +1,7 @@
 package com.fm.app.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fm.app.entities.Cart;
 import com.fm.app.exceptions.InvalidClientException;
@@ -8,6 +9,7 @@ import com.fm.app.repositories.CartRepository;
 import com.fm.app.repositories.ClientRepository;
 import com.fm.app.services.CartService;
 
+@Service
 public class CartServiceImpl implements CartService{
 
 	@Autowired

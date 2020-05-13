@@ -43,9 +43,10 @@ public class ClientController {
 	public String addClient(@RequestBody Client client) {
 		client.setClientId(sequenceGeneratorService.generateSequence(Client.SEQUENCE_NAME));
 		client.setHashedPassword(encoder.encode(clientPassword));
+		//String uid = firebaseService.addUserToFirebase(client,clientPassword);
+		//client.setFirebaseId(uid);
 		client = clientRepository.save(client);
-		String uid = firebaseService.addUserToFirebase(client,clientPassword);
-		return "success :: " + uid;
+		return "success";
 	}
 	
 	@PostMapping("/{id}/lat-long/lat/{lat}/long/{longitude}")
@@ -63,7 +64,7 @@ public class ClientController {
 	}
 	
 	@GetMapping
-	public List<Client> getAll(@RequestBody Client client) {
+	public List<Client> getAll() {
 		return clientRepository.findAll();
 	}
 
