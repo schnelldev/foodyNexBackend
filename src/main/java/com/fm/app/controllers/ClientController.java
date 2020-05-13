@@ -43,8 +43,8 @@ public class ClientController {
 	public String addClient(@RequestBody Client client) {
 		client.setClientId(sequenceGeneratorService.generateSequence(Client.SEQUENCE_NAME));
 		client.setHashedPassword(encoder.encode(clientPassword));
-		//String uid = firebaseService.addUserToFirebase(client,clientPassword);
-		//client.setFirebaseId(uid);
+		String uid = firebaseService.addUserToFirebase(client,clientPassword);
+		client.setFirebaseId(uid);
 		client = clientRepository.save(client);
 		return "success";
 	}
